@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapp_clone_app/whatsapp_home.dart';
+import 'package:camera/camera.dart';
 
-void main() => runApp(MyApp());
+List<CameraDescription> cameras;
+
+Future<Null> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  cameras = await availableCameras();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
@@ -13,7 +20,7 @@ class MyApp extends StatelessWidget {
         accentColor: Color(0xff25D366),
       ),
       title: 'WhatsApp Clone',
-      home: WhatsAppHome(),
+      home: WhatsAppHome(cameras),
     );
   }
 }

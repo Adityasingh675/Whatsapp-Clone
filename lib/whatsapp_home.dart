@@ -5,6 +5,8 @@ import 'package:whatsapp_clone_app/pages/chat.dart';
 import 'package:whatsapp_clone_app/pages/status.dart';
 
 class WhatsAppHome extends StatefulWidget {
+  var cameras;
+  WhatsAppHome(this.cameras);
   @override
   _WhatsAppHomeState createState() => _WhatsAppHomeState();
 }
@@ -26,26 +28,29 @@ class _WhatsAppHomeState extends State<WhatsAppHome>
         title: Text('WhatsApp'),
         elevation: 0.7,
         bottom: TabBar(
-            controller: _tabController,
-            indicatorColor: Colors.white,
-            tabs: [
-              Tab(
-                icon: Icon(Icons.camera_alt),
-              ),
-              Tab(text: 'CHATS'),
-              Tab(text: 'STATUS'),
-              Tab(text: 'CALLS'),
-            ],),
+          controller: _tabController,
+          indicatorColor: Colors.white,
+          tabs: [
+            Tab(
+              icon: Icon(Icons.camera_alt),
+            ),
+            Tab(text: 'CHATS'),
+            Tab(text: 'STATUS'),
+            Tab(text: 'CALLS'),
+          ],
+        ),
         actions: [
           Icon(Icons.search),
-          Padding(padding: EdgeInsets.symmetric(horizontal: 5.0),),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 5.0),
+          ),
           Icon(Icons.more_vert),
         ],
       ),
       body: TabBarView(
         controller: _tabController,
         children: [
-          Camera(),
+          Camera(widget.cameras),
           Chat(),
           Status(),
           Call(),
@@ -53,7 +58,10 @@ class _WhatsAppHomeState extends State<WhatsAppHome>
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).accentColor,
-        child: Icon(Icons.message, color: Colors.white,),
+        child: Icon(
+          Icons.message,
+          color: Colors.white,
+        ),
         onPressed: () {
           print('New Chat');
         },
